@@ -8,7 +8,7 @@ function App() {
     <>
       <nav>
         <Link to={"/"}>Home</Link>
-        <Link to={"/articles"}>Apprticles</Link>
+        <Link to={"/articles"}>Articles</Link>
       </nav>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
