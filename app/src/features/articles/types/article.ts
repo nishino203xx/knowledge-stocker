@@ -7,6 +7,9 @@ export type Article = {
   /** 記事タイトル */
   title: string;
 
+  /** 記事内容 */
+  body: string;
+
   /** 記事のURL */
   url: string;
 

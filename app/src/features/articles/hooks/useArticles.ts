@@ -6,6 +6,7 @@ export const mapQiitaToArticle = (item: any): Article => {
   return {
     id: `qiita-${item.id}`,
     title: item.title,
+    body: item.body,
     url: item.url,
     tags: item.tags.map((tag: any) => tag.name),
     likesCount: item.likes_count,
