@@ -12,7 +12,9 @@ function ArticleDetailPage() {
   return (
     <>
       <h1>記事詳細</h1>
-      <Markdown remarkPlugins={[remarkGfm]}>{article?.body}</Markdown>
+      <Markdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
+        {article?.body}
+      </Markdown>
     </>
   );
 }
