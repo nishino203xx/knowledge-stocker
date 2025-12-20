@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useArticles } from "../hooks/useArticles";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 function ArticleDetailPage() {
   const { articles } = useArticles();
@@ -10,8 +12,7 @@ function ArticleDetailPage() {
   return (
     <>
       <h1>記事詳細</h1>
-      {/* todo: markdown形式なので、HTMLに変換して表示する */}
-      {article?.body}
+      <Markdown remarkPlugins={[remarkGfm]}>{article?.body}</Markdown>
     </>
   );
 }
