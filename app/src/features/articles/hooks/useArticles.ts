@@ -19,5 +19,17 @@ export function useArticles() {
     fetchArticles();
   }, []);
 
-  return { articles };
+  const searchArticles = async (keyword: string): Promise<void> => {
+    try {
+      const response = await axios.get("https://qiita.com/api/v2/items", {
+        params: { query: keyword },
+      });
+      const articles = response.data.map(mapQiitaToArticle);
+      setArticles(articles);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { articles, searchArticles };
 }

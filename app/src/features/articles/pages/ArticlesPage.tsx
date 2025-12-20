@@ -1,11 +1,13 @@
 import { ArticleList } from "../components/ArticleList";
+import ArticleSearch from "../components/ArticleSearch/ArticleSearch";
 import { useArticles } from "../hooks/useArticles";
 
 function ArticlesPage() {
-  const { articles } = useArticles();
+  const { articles, searchArticles } = useArticles();
+
   return (
     <>
-      <h1>記事一覧</h1>
+      <ArticleSearch searchArticles={searchArticles}></ArticleSearch>
       <ArticleList articles={articles} />
     </>
   );
