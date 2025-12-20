@@ -7,15 +7,16 @@ export function useArticles() {
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    axios
-      .get("https://qiita.com/api/v2/items")
-      .then(function (response) {
+    const fetchArticles = async (): Promise<void> => {
+      try {
+        const response = await axios.get("https://qiita.com/api/v2/items");
         const articles = response.data.map(mapQiitaToArticle);
         setArticles(articles);
-      })
-      .catch(function (error) {
+      } catch (error) {
         console.log(error);
-      });
+      }
+    };
+    fetchArticles();
   }, []);
 
   return { articles };
