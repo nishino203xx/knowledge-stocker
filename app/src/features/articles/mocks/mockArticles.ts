@@ -4,6 +4,7 @@ export const mockArticles: Article[] = [
   {
     id: "qiita_1",
     title: "React 18 の新機能まとめ",
+    body: "",
     url: "https://qiita.com/example/articles/1",
     tags: ["react", "javascript"],
     likesCount: 120,
@@ -17,6 +18,7 @@ export const mockArticles: Article[] = [
   {
     id: "qiita_2",
     title: "TypeScript の初歩から応用まで解説",
+    body: "",
     url: "https://qiita.com/example/articles/2",
     tags: ["typescript", "frontend"],
     likesCount: 95,
@@ -30,6 +32,7 @@ export const mockArticles: Article[] = [
   {
     id: "zenn_10",
     title: "Zenn で学ぶモダンフロントエンド入門",
+    body: "",
     url: "https://zenn.dev/example/articles/10",
     tags: ["zenn", "frontend"],
     likesCount: 45,
@@ -43,6 +46,7 @@ export const mockArticles: Article[] = [
   {
     id: "zenn_11",
     title: "Docker × React の開発環境構築ガイド",
+    body: "",
     url: "https://zenn.dev/example/articles/11",
     tags: ["docker", "react"],
     likesCount: 67,
