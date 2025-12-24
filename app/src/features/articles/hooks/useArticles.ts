@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import type { Article } from "../types/article";
 import { mapQiitaToArticle } from "../../../api/mapQiitaToArticle";
@@ -6,6 +6,8 @@ import { mapDevToToArticle } from "../../../api/mapDevToToArticle";
 
 export function useArticles() {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [sort, setSort] = useState<"createAt">("createAt");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
@@ -28,6 +30,15 @@ export function useArticles() {
     fetchArticles();
   }, []);
 
+  const visibleArticles = useMemo(() => {
+    const sorted = [...articles].sort((a, b) => {
+      const aTime = new Date(a.createAt).getTime();
+      const bTime = new Date(b.createAt).getTime();
+      return sortOrder === "asc" ? aTime - bTime : bTime - aTime;
+    });
+    return sorted;
+  }, [articles, sort, sortOrder]);
+
   const searchArticles = async (keyword: string): Promise<void> => {
     try {
       const response = await axios.get("https://qiita.com/api/v2/items", {
@@ -40,5 +51,5 @@ export function useArticles() {
     }
   };
 
-  return { articles, searchArticles };
+  return { visibleArticles, searchArticles, setSort, setSortOrder };
 }
