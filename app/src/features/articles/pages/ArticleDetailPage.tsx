@@ -4,9 +4,9 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 function ArticleDetailPage() {
-  const { articles } = useArticles();
+  const { visibleArticles } = useArticles();
   const { itemId } = useParams();
-  const article = articles.find((article) => {
+  const article = visibleArticles.find((article) => {
     return article.remoteId === itemId;
   });
   return (
