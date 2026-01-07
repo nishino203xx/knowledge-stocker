@@ -6,12 +6,14 @@ import { mapDevToToArticle } from "../../../api/mapDevToToArticle";
 
 export function useArticles() {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sort, setSort] = useState<"createAt">("createAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
       try {
+        setIsLoading(true);
         const [qiitaRes, devToRes] = await Promise.all([
           axios.get("https://qiita.com/api/v2/items"),
           axios.get("https://dev.to/api/articles"),
@@ -25,6 +27,8 @@ export function useArticles() {
         setArticles(marged);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchArticles();
@@ -51,5 +55,5 @@ export function useArticles() {
     }
   };
 
-  return { visibleArticles, searchArticles, setSort, setSortOrder };
+  return { visibleArticles, isLoading, searchArticles, setSort, setSortOrder };
 }
