@@ -19,12 +19,11 @@ export const mapDevToToArticle = (item: DevToItem): Article => {
   return {
     id: `devto-${item.id}`,
     title: item.title,
-    body: undefined,
     url: item.url,
     tags: item.tag_list,
     likesCount: item.positive_reactions_count,
     authorName: item.user?.name ?? item.user?.username ?? "",
-    source: "dev.to",
+    source: "devto",
     remoteId: String(item.id),
     memo: "",
     createAt: item.published_at,

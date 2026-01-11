@@ -1,4 +1,4 @@
-export type ArticleSource = "qiita" | "dev.to";
+export type ArticleSource = "qiita" | "devto";
 
 export type Article = {
   /** アプリ内で一意のID(source + remoteId) */
@@ -6,9 +6,6 @@ export type Article = {
 
   /** 記事タイトル */
   title: string;
-
-  /** 記事内容 */
-  body?: string;
 
   /** 記事のURL */
   url: string;

@@ -1,17 +1,18 @@
 import { useParams } from "react-router-dom";
-import { useArticles } from "../hooks/useArticles";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useArticleDetail } from "../hooks/useArticleDetail";
 import style from "./ArticleDetailPage.module.scss";
+import type { ArticleSource } from "../types/article";
+
+type ArticleDetailRouteParams = {
+  source: ArticleSource;
+  itemId: string;
+};
 
 function ArticleDetailPage() {
-  const { visibleArticles } = useArticles();
-  const { itemId } = useParams();
-  const article = visibleArticles.find((article) => {
-    return article.remoteId === itemId;
-  });
-  const { body, isLoading } = useArticleDetail(article);
+  const { source, itemId } = useParams<ArticleDetailRouteParams>();
+  const { body, isLoading } = useArticleDetail(source, itemId);
   return (
     <>
       <h1>記事詳細</h1>

@@ -1,36 +1,37 @@
 import { useEffect, useState } from "react";
-import type { Article } from "../types/article";
+import type { ArticleSource } from "../types/article";
 import axios from "axios";
 
-export function useArticleDetail(article: Article | undefined) {
+export function useArticleDetail(
+  source: ArticleSource | undefined,
+  itemId: string | undefined
+) {
   const [body, setBody] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!article) return;
-
-    // すでに本文がある場合は、記事詳細取得APIは呼び出不要
-    if (article.body && article.body.trim().length > 0) {
-      setBody(article.body);
-    }
+    if (!source || !itemId) return;
 
     const fetchArticleDetail = async (): Promise<void> => {
       try {
         setIsLoading(true);
-        switch (article.source) {
+        switch (source) {
           case "qiita":
-            // 一覧取得時にbodyも取得しているため不要
-            break;
-          case "dev.to":
-            const res = await axios.get(
-              `https://dev.to/api/articles/${article.remoteId}`
+            const qiitaRes = await axios.get(
+              `https://qiita.com/api/v2/items/${itemId}`
             );
-
-            const body: string = res.data.body_markdown ?? "";
-            setBody(body);
+            const qiitaBody: string = qiitaRes.data.body ?? "";
+            setBody(qiitaBody);
+            break;
+          case "devto":
+            const devToRes = await axios.get(
+              `https://dev.to/api/articles/${itemId}`
+            );
+            const devToBody: string = devToRes.data.body_markdown ?? "";
+            setBody(devToBody);
             break;
           default:
-            setBody(article.body ?? "");
+            setBody("");
             break;
         }
       } catch (error) {
@@ -40,7 +41,7 @@ export function useArticleDetail(article: Article | undefined) {
       }
     };
     fetchArticleDetail();
-  }, [article]);
+  }, [source, itemId]);
 
   return { body, isLoading };
 }
