@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "./ArticleSearch.module.scss";
 
-function ArticleSearch({
+export function ArticleSearch({
   searchArticles,
 }: {
   searchArticles: (keyword: string) => void;
@@ -38,5 +38,3 @@ function ArticleSearch({
     </div>
   );
 }
-
-export default ArticleSearch;

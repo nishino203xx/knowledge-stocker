@@ -1,0 +1,1 @@
+export { ArticleTagChip } from "./ArticleTagChip";

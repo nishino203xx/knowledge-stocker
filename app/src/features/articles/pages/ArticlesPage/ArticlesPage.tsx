@@ -1,8 +1,8 @@
-import { ArticleList } from "../components/ArticleList";
-import ArticleSearch from "../components/ArticleSearch/ArticleSearch";
-import { useArticles } from "../hooks/useArticles";
+import { ArticleList } from "../../components/ArticleList";
+import { ArticleSearch } from "../../components/ArticleSearch";
+import { useArticles } from "../../hooks/useArticles";
 
-function ArticlesPage() {
+export function ArticlesPage() {
   const {
     visibleArticles,
     isLoading,
@@ -27,5 +27,3 @@ function ArticlesPage() {
     </>
   );
 }
-
-export default ArticlesPage;
