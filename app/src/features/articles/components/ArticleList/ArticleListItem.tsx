@@ -17,7 +17,7 @@ export const ArticleListItem = ({ article }: { article: Article }) => {
 
   return (
     <Link
-      to={`/article/${article.remoteId}`}
+      to={`/articles/${article.remoteId}`}
       key={article.id}
       className={style.articleCard}
     >

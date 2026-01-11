@@ -4,13 +4,30 @@ import style from "./AppLayout.module.scss";
 export function AppLayout() {
   return (
     <div className={style.layout}>
-      <header className={style.header}></header>
-      <aside className={style.navbar}>
+      <header className={style.header}>
         <nav className={style.nav}>
-          <NavLink to={"/"}>Home</NavLink>
-          <NavLink to={"/articles"}>Articles</NavLink>
+          <NavLink
+            to={"/"}
+            className={({ isActive }) =>
+              isActive
+                ? `${style.navItem} ${style["navItem--active"]}`
+                : `${style.navItem}`
+            }
+          >
+            ホーム
+          </NavLink>
+          <NavLink
+            to={"/articles"}
+            className={({ isActive }) =>
+              isActive
+                ? `${style.navItem} ${style["navItem--active"]}`
+                : `${style.navItem}`
+            }
+          >
+            記事一覧
+          </NavLink>
         </nav>
-      </aside>
+      </header>
       <main className={style.main}>
         <Outlet />
       </main>
