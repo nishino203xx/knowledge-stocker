@@ -1,4 +1,5 @@
-import type { Article } from "../features/articles/types/article";
+import type { Article } from "../../features/articles/types/article";
+import type { ArticleDetail } from "../../features/articles/types/articleDetail";
 
 type QiitaTag = { name: string; versions: string[] };
 type QiitaUser = { id: string; name: string };
@@ -27,5 +28,12 @@ export const mapQiitaToArticle = (item: QiitaItem): Article => {
     memo: "",
     createAt: item.created_at,
     updateAt: item.updated_at,
+  };
+};
+
+export const mapQiitaToArticleDetail = (item: QiitaItem): ArticleDetail => {
+  return {
+    ...mapQiitaToArticle(item),
+    body: item.body,
   };
 };

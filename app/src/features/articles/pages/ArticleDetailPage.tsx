@@ -12,17 +12,17 @@ type ArticleDetailRouteParams = {
 
 function ArticleDetailPage() {
   const { source, itemId } = useParams<ArticleDetailRouteParams>();
-  const { body, isLoading, error } = useArticleDetail(source, itemId);
+  const { articleDetail, isLoading, error } = useArticleDetail(source, itemId);
   return (
     <>
-      <h1>記事詳細</h1>
+      <h1>{articleDetail?.title}</h1>
       {isLoading ? (
         <div className={style.loadingWrapper}>
           <div className={style.loading}></div>
         </div>
       ) : (
         <Markdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
-          {body}
+          {articleDetail?.body}
         </Markdown>
       )}
       <p>{error}</p>

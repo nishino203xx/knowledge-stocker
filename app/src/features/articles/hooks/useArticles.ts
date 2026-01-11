@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import type { Article } from "../types/article";
-import { mapQiitaToArticle } from "../../../api/mapQiitaToArticle";
-import { mapDevToToArticle } from "../../../api/mapDevToToArticle";
+import { mapQiitaToArticle } from "../../../api/qiita/map";
+import { mapDevToToArticle } from "../../../api/devTo/map";
 
 export function useArticles() {
   const [articles, setArticles] = useState<Article[]>([]);
