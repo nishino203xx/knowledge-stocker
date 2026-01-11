@@ -8,6 +8,7 @@ export function useArticleDetail(
 ) {
   const [body, setBody] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>();
 
   useEffect(() => {
     if (!source || !itemId) return;
@@ -31,11 +32,11 @@ export function useArticleDetail(
             setBody(devToBody);
             break;
           default:
-            setBody("");
+            setError("記事の取得元が不正です。");
             break;
         }
       } catch (error) {
-        console.log(error);
+        setError("記事が見つかりませんでした。");
       } finally {
         setIsLoading(false);
       }
@@ -43,5 +44,5 @@ export function useArticleDetail(
     fetchArticleDetail();
   }, [source, itemId]);
 
-  return { body, isLoading };
+  return { body, isLoading, error };
 }

@@ -7,6 +7,7 @@ import { mapDevToToArticle } from "../../../api/mapDevToToArticle";
 export function useArticles() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>();
   const [sort, setSort] = useState<"createAt">("createAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
@@ -26,7 +27,7 @@ export function useArticles() {
 
         setArticles(marged);
       } catch (error) {
-        console.log(error);
+        setError("記事取得時に問題が発生しました。");
       } finally {
         setIsLoading(false);
       }
@@ -60,9 +61,16 @@ export function useArticles() {
 
       setArticles(marged);
     } catch (error) {
-      console.log(error);
+      setError("記事取得時に問題が発生しました。");
     }
   };
 
-  return { visibleArticles, isLoading, searchArticles, setSort, setSortOrder };
+  return {
+    visibleArticles,
+    isLoading,
+    error,
+    searchArticles,
+    setSort,
+    setSortOrder,
+  };
 }

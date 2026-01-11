@@ -3,8 +3,14 @@ import ArticleSearch from "../components/ArticleSearch/ArticleSearch";
 import { useArticles } from "../hooks/useArticles";
 
 function ArticlesPage() {
-  const { visibleArticles, isLoading, searchArticles, setSort, setSortOrder } =
-    useArticles();
+  const {
+    visibleArticles,
+    isLoading,
+    error,
+    searchArticles,
+    setSort,
+    setSortOrder,
+  } = useArticles();
 
   return (
     <>
@@ -17,6 +23,7 @@ function ArticlesPage() {
         <option value="desc">降順</option>
       </select>
       <ArticleList articles={visibleArticles} isLoading={isLoading} />
+      <p>{error}</p>
     </>
   );
 }

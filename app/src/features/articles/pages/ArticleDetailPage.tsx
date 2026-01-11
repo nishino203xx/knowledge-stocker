@@ -12,7 +12,7 @@ type ArticleDetailRouteParams = {
 
 function ArticleDetailPage() {
   const { source, itemId } = useParams<ArticleDetailRouteParams>();
-  const { body, isLoading } = useArticleDetail(source, itemId);
+  const { body, isLoading, error } = useArticleDetail(source, itemId);
   return (
     <>
       <h1>記事詳細</h1>
@@ -25,6 +25,7 @@ function ArticleDetailPage() {
           {body}
         </Markdown>
       )}
+      <p>{error}</p>
     </>
   );
 }
