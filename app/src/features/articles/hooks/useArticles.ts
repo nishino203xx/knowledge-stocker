@@ -45,11 +45,20 @@ export function useArticles() {
 
   const searchArticles = async (keyword: string): Promise<void> => {
     try {
-      const response = await axios.get("https://qiita.com/api/v2/items", {
-        params: { query: keyword },
-      });
-      const articles = response.data.map(mapQiitaToArticle);
-      setArticles(articles);
+      const [qiitaRes, devToRes] = await Promise.all([
+        axios.get("https://qiita.com/api/v2/items", {
+          params: { query: `tag:${keyword}` },
+        }),
+        axios.get("https://dev.to/api/articles", {
+          params: { tag: keyword },
+        }),
+      ]);
+      const qiitaArticles: Article[] = qiitaRes.data.map(mapQiitaToArticle);
+      const devToArticles: Article[] = devToRes.data.map(mapDevToToArticle);
+
+      const marged = [...qiitaArticles, ...devToArticles];
+
+      setArticles(marged);
     } catch (error) {
       console.log(error);
     }
