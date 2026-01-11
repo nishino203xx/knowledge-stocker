@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "./ArticleSearch.module.scss";
 
 export function ArticleSearch({
