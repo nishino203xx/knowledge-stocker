@@ -16,7 +16,7 @@ export const ArticleListItem = ({ article }: { article: Article }) => {
     >
       <div className={style.articleCard__header}>
         <div className={`${style.articleSource} ${meta.className}`}>
-          {meta.label}
+          {meta.iconLabel}
         </div>
         <div>投稿日：{formattedJstDatetime(article.createAt)}</div>
       </div>
