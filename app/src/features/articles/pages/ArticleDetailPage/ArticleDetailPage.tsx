@@ -6,6 +6,7 @@ import style from "./ArticleDetailPage.module.scss";
 import type { ArticleSource } from "../../types/article";
 import { formattedJstDatetime } from "../../../../utils/formatDate";
 import { ARTICLE_SOURCE_META } from "../../constants/articleSourceMeta";
+import { ArticleTagChip } from "../../components/ArticleTagChip";
 
 type ArticleDetailRouteParams = {
   source: ArticleSource;
@@ -28,6 +29,11 @@ export function ArticleDetailPage() {
   return (
     <div className={style.articleDetail}>
       <h1 className={style.articleDetail__title}>{articleDetail.title}</h1>
+      <div className={style.articleDetail__tags}>
+        {articleDetail.tags.map((tag) => {
+          return <ArticleTagChip key={tag} tag={tag} />;
+        })}
+      </div>
       <div>投稿日：{formattedJstDatetime(articleDetail.createAt ?? "")}</div>
       <a
         href={articleDetail.url}
