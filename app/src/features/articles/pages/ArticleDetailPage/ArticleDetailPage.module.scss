@@ -19,7 +19,26 @@
   }
 }
 
+.articleDetail {
+  padding: 10px 30px;
+}
+
 .articleDetail__tags {
   display: flex;
   gap: 6px;
 }
+
+// markdown用のデザイン ここから
+blockquote {
+  margin: 0;
+  padding: 0 20px;
+  border-left: solid 4px rgb(191, 188, 188);
+}
+
+pre {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+}
+// markdown用のデザイン ここまで
