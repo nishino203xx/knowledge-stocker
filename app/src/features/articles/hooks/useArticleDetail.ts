@@ -4,6 +4,8 @@ import axios from "axios";
 import type { ArticleDetail } from "../types/articleDetail";
 import { mapQiitaToArticleDetail } from "../../../api/qiita/map";
 import { mapDevToToArticleDetail } from "../../../api/devTo/map";
+import { DevToItemShema } from "../../../api/devTo/schema";
+import { QiitaItemShema } from "../../../api/qiita/schema";
 
 export function useArticleDetail(
   source: ArticleSource | undefined,
@@ -24,13 +26,15 @@ export function useArticleDetail(
             const qiitaRes = await axios.get(
               `https://qiita.com/api/v2/items/${itemId}`
             );
-            setArticleDetail(mapQiitaToArticleDetail(qiitaRes.data));
+            const qiitaParsed = QiitaItemShema.parse(qiitaRes.data);
+            setArticleDetail(mapQiitaToArticleDetail(qiitaParsed));
             break;
           case "devto":
             const devToRes = await axios.get(
               `https://dev.to/api/articles/${itemId}`
             );
-            setArticleDetail(mapDevToToArticleDetail(devToRes.data));
+            const devToParsed = DevToItemShema.parse(devToRes.data);
+            setArticleDetail(mapDevToToArticleDetail(devToParsed));
             break;
           default:
             setError("記事の取得元が不正です。");
