@@ -47,9 +47,11 @@ export function ArticleDetailPage() {
         {meta.label} で開く
       </a>
 
-      <Markdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
-        {articleDetail.body}
-      </Markdown>
+      <div className={style.articleDetail__body}>
+        <Markdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
+          {articleDetail.body}
+        </Markdown>
+      </div>
 
       <p>{error}</p>
     </div>

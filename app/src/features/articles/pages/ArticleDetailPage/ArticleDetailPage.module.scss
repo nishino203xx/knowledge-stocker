@@ -19,10 +19,6 @@
   }
 }
 
-.articleDetail {
-  padding: 10px 30px;
-}
-
 .articleDetail__header {
   display: flex;
   align-items: center;
@@ -35,16 +31,21 @@
 }
 
 // markdown用のデザイン ここから
-blockquote {
+.articleDetail__body blockquote {
   margin: 0;
   padding: 0 20px;
   border-left: solid 4px rgb(191, 188, 188);
 }
 
-pre {
+.articleDetail__body pre {
   padding: 10px;
   background-color: black;
   color: white;
   border-radius: 5px;
+  overflow-x: auto;
+}
+
+.articleDetail__body img {
+  max-width: 100%;
 }
 // markdown用のデザイン ここまで
