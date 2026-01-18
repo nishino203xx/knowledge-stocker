@@ -1,13 +1,11 @@
 import { formattedJstDatetime } from "../../../../utils/formatDate";
-import { ARTICLE_SOURCE_META } from "../../constants/articleSourceMeta";
 import type { Article } from "../../types/article";
+import { ArticleSourceBadge } from "../ArticleSourceBadge/ArticleSourceBadge";
 import { ArticleTagChip } from "../ArticleTagChip/ArticleTagChip";
 import style from "./ArticleList.module.scss";
 import { Link } from "react-router-dom";
 
 export const ArticleListItem = ({ article }: { article: Article }) => {
-  const meta = ARTICLE_SOURCE_META[article.source];
-
   return (
     <Link
       to={`/articles/${article.source}/${article.remoteId}`}
@@ -15,9 +13,7 @@ export const ArticleListItem = ({ article }: { article: Article }) => {
       className={style.articleCard}
     >
       <div className={style.articleCard__header}>
-        <div className={`${style.articleSource} ${meta.className}`}>
-          {meta.iconLabel}
-        </div>
+        <ArticleSourceBadge source={article.source}></ArticleSourceBadge>
         <div>投稿日：{formattedJstDatetime(article.createAt)}</div>
       </div>
       <div className={style.articleCard__title}>{article.title}</div>

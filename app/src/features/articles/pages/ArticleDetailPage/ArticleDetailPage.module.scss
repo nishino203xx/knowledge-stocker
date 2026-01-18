@@ -23,6 +23,12 @@
   padding: 10px 30px;
 }
 
+.articleDetail__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .articleDetail__tags {
   display: flex;
   gap: 6px;

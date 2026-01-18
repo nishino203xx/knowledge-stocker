@@ -7,6 +7,7 @@ import type { ArticleSource } from "../../types/article";
 import { formattedJstDatetime } from "../../../../utils/formatDate";
 import { ARTICLE_SOURCE_META } from "../../constants/articleSourceMeta";
 import { ArticleTagChip } from "../../components/ArticleTagChip";
+import { ArticleSourceBadge } from "../../components/ArticleSourceBadge/ArticleSourceBadge";
 
 type ArticleDetailRouteParams = {
   source: ArticleSource;
@@ -28,7 +29,10 @@ export function ArticleDetailPage() {
   const meta = ARTICLE_SOURCE_META[articleDetail.source];
   return (
     <div className={style.articleDetail}>
-      <h1 className={style.articleDetail__title}>{articleDetail.title}</h1>
+      <div className={style.articleDetail__header}>
+        <ArticleSourceBadge source={articleDetail.source}></ArticleSourceBadge>
+        <h1 className={style.articleDetail__title}>{articleDetail.title}</h1>
+      </div>
       <div className={style.articleDetail__tags}>
         {articleDetail.tags.map((tag) => {
           return <ArticleTagChip key={tag} tag={tag} />;
