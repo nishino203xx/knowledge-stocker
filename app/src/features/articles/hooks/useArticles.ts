@@ -44,14 +44,17 @@ export function useArticles() {
     return sorted;
   }, [articles, sort, sortOrder]);
 
-  const searchArticles = async (keyword: string): Promise<void> => {
+  const searchArticles = async (keywords: Array<string>): Promise<void> => {
     try {
+      /**
+       * TODO: dev.toはタグの複数検索に対応していない。複数回APIを呼び出すなど検討が必要
+       */
       const [qiitaRes, devToRes] = await Promise.all([
         axios.get("https://qiita.com/api/v2/items", {
-          params: { query: `tag:${keyword}` },
+          params: { query: `tag:${keywords.join(",")}` },
         }),
         axios.get("https://dev.to/api/articles", {
-          params: { tag: keyword },
+          params: { tag: keywords.join(",") },
         }),
       ]);
       const qiitaArticles: Article[] = qiitaRes.data.map(mapQiitaToArticle);

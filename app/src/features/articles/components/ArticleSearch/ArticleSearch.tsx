@@ -1,26 +1,28 @@
-import { useState } from "react";
 import style from "./ArticleSearch.module.scss";
 
 export function ArticleSearch({
-  searchArticles,
+  keyword,
+  onSearch,
+  onChangeKeyword,
 }: {
-  searchArticles: (keyword: string) => void;
+  keyword: string;
+  onSearch: (keyword: string) => void;
+  onChangeKeyword: (keyword: string) => void;
 }) {
-  const [keyword, setKeyword] = useState<string>("");
-
+  // TODO:検索の制約（タグの複数検索は OR 検索であることなど）を明記
   return (
     <div className={style.articleSearch}>
       <input
         className={style.articleSearch__input}
         value={keyword}
         onChange={(e) => {
-          setKeyword(e.target.value);
+          onChangeKeyword(e.target.value);
         }}
       />
       <button
         className={`${style.articleSearch__button} ${style["articleSearch__button--search"]}`}
         onClick={() => {
-          searchArticles(keyword);
+          onSearch(keyword);
         }}
       >
         検索
@@ -29,7 +31,7 @@ export function ArticleSearch({
         <button
           className={`${style.articleSearch__button} ${style["articleSearch__button--clear"]}`}
           onClick={() => {
-            setKeyword("");
+            onChangeKeyword("");
           }}
         >
           ✖︎
