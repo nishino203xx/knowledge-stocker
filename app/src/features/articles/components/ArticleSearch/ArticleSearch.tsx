@@ -6,7 +6,7 @@ export function ArticleSearch({
   onChangeKeyword,
 }: {
   keyword: string;
-  onSearch: (keyword: string) => void;
+  onSearch: () => void;
   onChangeKeyword: (keyword: string) => void;
 }) {
   // TODO:検索の制約（タグの複数検索は OR 検索であることなど）を明記
@@ -22,7 +22,7 @@ export function ArticleSearch({
       <button
         className={`${style.articleSearch__button} ${style["articleSearch__button--search"]}`}
         onClick={() => {
-          onSearch(keyword);
+          onSearch();
         }}
       >
         検索
