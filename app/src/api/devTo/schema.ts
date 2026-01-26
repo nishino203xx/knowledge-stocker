@@ -25,3 +25,7 @@ export const DevToItemShema = z.object({
   tag_list: DevToTagsShema,
   user: DevToUserShema,
 });
+
+export type DevToTags = z.infer<typeof DevToTagsShema>;
+export type DevToUser = z.infer<typeof DevToUserShema>;
+export type DevToItem = z.infer<typeof DevToItemShema>;

@@ -1,22 +1,6 @@
 import type { Article } from "../../features/articles/types/article";
 import type { ArticleDetail } from "../../features/articles/types/articleDetail";
-
-type DevToUser = {
-  name: string;
-  user_id: number;
-};
-type DevToItem = {
-  id: number;
-  title: string;
-  body_markdown: string;
-  url: string;
-  positive_reactions_count: number;
-  published_at: string;
-  edited_at: string | null;
-  tags: string[] | string;
-  tag_list: string[] | string;
-  user: DevToUser;
-};
+import type { DevToItem } from "./schema";
 
 export const mapDevToToArticle = (item: DevToItem): Article => {
   return {
