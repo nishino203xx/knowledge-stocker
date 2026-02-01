@@ -9,7 +9,7 @@ export function useArticles() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>();
   const [sort, setSort] = useState<"createAt">("createAt");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
