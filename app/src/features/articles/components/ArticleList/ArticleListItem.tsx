@@ -5,8 +5,10 @@ import { UnderstandingStatusBadge } from "../UnderstandingStatusBadge/Understand
 import { ArticleTagChip } from "../ArticleTagChip/ArticleTagChip";
 import style from "./ArticleList.module.scss";
 import { Link } from "react-router-dom";
+import { useUnderstandingStatus } from "../../../understandingStatus/hooks/useUnderstandingStatus";
 
 export const ArticleListItem = ({ article }: { article: Article }) => {
+  const { getStatus } = useUnderstandingStatus();
   return (
     <Link
       to={`/articles/${article.source}/${article.remoteId}`}
@@ -20,7 +22,9 @@ export const ArticleListItem = ({ article }: { article: Article }) => {
       <div className={style.articleCard__title}>
         {article.title}
         {/* TODO: statusに記事毎の理解度ステータスを渡す */}
-        <UnderstandingStatusBadge status={"unread"}></UnderstandingStatusBadge>
+        <UnderstandingStatusBadge
+          status={getStatus(article.id)}
+        ></UnderstandingStatusBadge>
       </div>
       <div className={style.articleCard__tags}>
         {article.tags.map((tag) => {

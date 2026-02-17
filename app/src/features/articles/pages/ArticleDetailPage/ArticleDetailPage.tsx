@@ -13,6 +13,7 @@ import {
   UNDERSTANDING_STATUS_META,
   type UnderstandingStatus,
 } from "../../constants/understandingStatusMeta";
+import { useUnderstandingStatus } from "../../../understandingStatus/hooks/useUnderstandingStatus";
 
 type ArticleDetailRouteParams = {
   source: ArticleSource;
@@ -22,6 +23,7 @@ type ArticleDetailRouteParams = {
 export function ArticleDetailPage() {
   const { source, itemId } = useParams<ArticleDetailRouteParams>();
   const { articleDetail, isLoading, error } = useArticleDetail(source, itemId);
+  const { getStatus, setStatus } = useUnderstandingStatus();
   if (isLoading)
     return (
       <div className={style.loadingWrapper}>
@@ -38,7 +40,14 @@ export function ArticleDetailPage() {
         <ArticleSourceBadge source={articleDetail.source}></ArticleSourceBadge>
         <h1 className={style.articleDetail__title}>{articleDetail.title}</h1>
       </div>
-      <ToggleGroup.Root type="single" className={style.underStandingStatus}>
+      <ToggleGroup.Root
+        type="single"
+        className={style.underStandingStatus}
+        value={getStatus(articleDetail.id)}
+        onValueChange={(value: UnderstandingStatus) =>
+          setStatus(articleDetail.id, value)
+        }
+      >
         {(Object.keys(UNDERSTANDING_STATUS_META) as UnderstandingStatus[]).map(
           (status) => {
             const meta = UNDERSTANDING_STATUS_META[status];
