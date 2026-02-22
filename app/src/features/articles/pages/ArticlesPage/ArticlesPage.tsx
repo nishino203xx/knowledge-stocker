@@ -41,13 +41,11 @@ export function ArticlesPage() {
           onChangeKeyword={setInputKeyword}
         ></ArticleSearch>
         <div className={style.filterControls}>
-          {appliedKeyword.length > 0 && (
-            <div className={style.articlesPage__tags}>
-              {appliedKeyword.map((tag) => {
-                return <ArticleTagChip key={tag} tag={tag} />;
-              })}
-            </div>
-          )}
+          <div className={style.articlesPage__tags}>
+            {appliedKeyword.map((tag) => {
+              return <ArticleTagChip key={tag} tag={tag} />;
+            })}
+          </div>
           <ArticleSort
             sort={sort}
             sortOrder={sortOrder}
