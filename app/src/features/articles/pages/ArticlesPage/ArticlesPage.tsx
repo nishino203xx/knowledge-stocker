@@ -26,7 +26,7 @@ export function ArticlesPage() {
    * 重複を除いたキーワード配列として検索処理を呼び出す
    */
   const onSearch = () => {
-    const keywords = inputKeyword.trim().split(/\s+/);
+    const keywords = inputKeyword.trim().split(/\s+/).filter(Boolean);
     const uniqueKeywords = Array.from(new Set(keywords));
     setAppliedKeyword(uniqueKeywords);
     searchArticles(uniqueKeywords);
