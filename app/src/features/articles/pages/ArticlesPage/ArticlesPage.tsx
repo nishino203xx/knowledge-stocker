@@ -4,6 +4,7 @@ import { ArticleSearch } from "../../components/ArticleSearch";
 import { useArticles } from "../../hooks/useArticles";
 import { ArticleTagChip } from "../../components/ArticleTagChip";
 import style from "./ArticlesPage.module.scss";
+import { ArticleSort } from "../../components/ArticleSort";
 
 export function ArticlesPage() {
   const {
@@ -43,19 +44,12 @@ export function ArticlesPage() {
           return <ArticleTagChip key={tag} tag={tag} />;
         })}
       </div>
-      <select
-        value={sort}
-        onChange={(e) => setSort(e.target.value as "createAt")}
-      >
-        <option value="createAt">投稿日時</option>
-      </select>
-      <select
-        value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
-      >
-        <option value="asc">昇順</option>
-        <option value="desc">降順</option>
-      </select>
+      <ArticleSort
+        sort={sort}
+        sortOrder={sortOrder}
+        onChangeSort={setSort}
+        onChangeSortOrder={setSortOrder}
+      ></ArticleSort>
       <ArticleList articles={visibleArticles} isLoading={isLoading} />
       <p>{error}</p>
     </>

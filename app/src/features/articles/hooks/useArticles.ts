@@ -3,13 +3,14 @@ import axios from "axios";
 import type { Article } from "../types/article";
 import { mapQiitaToArticle } from "../../../api/qiita/map";
 import { mapDevToToArticle } from "../../../api/devTo/map";
+import type { SortKey, SortOrder } from "../constants/sort";
 
 export function useArticles() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>();
-  const [sort, setSort] = useState<"createAt">("createAt");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [sort, setSort] = useState<SortKey>("createAt");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
