@@ -73,6 +73,8 @@ export function useArticles() {
     isLoading,
     error,
     searchArticles,
+    sort,
+    sortOrder,
     setSort,
     setSortOrder,
   };

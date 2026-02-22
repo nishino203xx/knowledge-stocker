@@ -11,6 +11,8 @@ export function ArticlesPage() {
     isLoading,
     error,
     searchArticles,
+    sort,
+    sortOrder,
     setSort,
     setSortOrder,
   } = useArticles();
@@ -41,10 +43,16 @@ export function ArticlesPage() {
           return <ArticleTagChip key={tag} tag={tag} />;
         })}
       </div>
-      <select onChange={(e) => setSort(e.target.value as "createAt")}>
+      <select
+        value={sort}
+        onChange={(e) => setSort(e.target.value as "createAt")}
+      >
         <option value="createAt">投稿日時</option>
       </select>
-      <select onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}>
+      <select
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
+      >
         <option value="asc">昇順</option>
         <option value="desc">降順</option>
       </select>
