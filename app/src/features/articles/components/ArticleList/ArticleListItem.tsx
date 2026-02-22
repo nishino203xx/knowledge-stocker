@@ -21,7 +21,6 @@ export const ArticleListItem = ({ article }: { article: Article }) => {
       </div>
       <div className={style.articleCard__title}>
         {article.title}
-        {/* TODO: statusに記事毎の理解度ステータスを渡す */}
         <UnderstandingStatusBadge
           status={getStatus(article.id)}
         ></UnderstandingStatusBadge>
