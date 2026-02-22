@@ -4,6 +4,7 @@ import {
   type SortKey,
   type SortOrder,
 } from "../../constants/sort";
+import style from "./ArticleSort.module.scss";
 
 export function ArticleSort({
   sort,
@@ -17,7 +18,7 @@ export function ArticleSort({
   onChangeSortOrder: (sortOrder: SortOrder) => void;
 }) {
   return (
-    <div>
+    <div className={style.articleSort}>
       <select
         value={sort}
         onChange={(e) => onChangeSort(e.target.value as SortKey)}

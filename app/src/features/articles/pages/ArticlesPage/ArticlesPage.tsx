@@ -34,22 +34,28 @@ export function ArticlesPage() {
 
   return (
     <>
-      <ArticleSearch
-        keyword={inputKeyword}
-        onSearch={onSearch}
-        onChangeKeyword={setInputKeyword}
-      ></ArticleSearch>
-      <div className={style.articlesPage__tags}>
-        {appliedKeyword.map((tag) => {
-          return <ArticleTagChip key={tag} tag={tag} />;
-        })}
+      <div className={style.searchArea}>
+        <ArticleSearch
+          keyword={inputKeyword}
+          onSearch={onSearch}
+          onChangeKeyword={setInputKeyword}
+        ></ArticleSearch>
+        <div className={style.filterControls}>
+          {appliedKeyword.length > 0 && (
+            <div className={style.articlesPage__tags}>
+              {appliedKeyword.map((tag) => {
+                return <ArticleTagChip key={tag} tag={tag} />;
+              })}
+            </div>
+          )}
+          <ArticleSort
+            sort={sort}
+            sortOrder={sortOrder}
+            onChangeSort={setSort}
+            onChangeSortOrder={setSortOrder}
+          ></ArticleSort>
+        </div>
       </div>
-      <ArticleSort
-        sort={sort}
-        sortOrder={sortOrder}
-        onChangeSort={setSort}
-        onChangeSortOrder={setSortOrder}
-      ></ArticleSort>
       <ArticleList articles={visibleArticles} isLoading={isLoading} />
       <p>{error}</p>
     </>

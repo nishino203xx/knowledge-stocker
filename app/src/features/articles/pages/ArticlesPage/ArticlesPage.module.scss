@@ -1,3 +1,15 @@
+.searchArea {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.filterControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .articlesPage__tags {
   display: flex;
   gap: 6px;
