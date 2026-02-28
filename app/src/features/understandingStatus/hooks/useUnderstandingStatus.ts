@@ -4,6 +4,7 @@ import {
   type UnderstandingStatusMap,
 } from "../storage/understandingStatusStorage";
 import type { UnderstandingStatus } from "../../articles/constants/understandingStatusMeta";
+import { StudyLogStorage } from "../../studyLog/storage/studyLogStorage";
 
 export const useUnderstandingStatus = () => {
   const [map, setMap] = useState<UnderstandingStatusMap>({});
@@ -25,6 +26,7 @@ export const useUnderstandingStatus = () => {
 
   const setStatus = (key: string, status: UnderstandingStatus) => {
     setMap((pre) => ({ ...pre, [key]: status }));
+    StudyLogStorage.incrementToday();
   };
 
   return { getStatus, setStatus };
