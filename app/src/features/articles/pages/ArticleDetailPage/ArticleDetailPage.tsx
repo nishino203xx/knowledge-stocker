@@ -44,9 +44,10 @@ export function ArticleDetailPage() {
         type="single"
         className={style.underStandingStatus}
         value={getStatus(articleDetail.id)}
-        onValueChange={(value: UnderstandingStatus) =>
-          setStatus(articleDetail.id, value)
-        }
+        onValueChange={(value) => {
+          if (!value) return;
+          setStatus(articleDetail.id, value as UnderstandingStatus);
+        }}
       >
         {(Object.keys(UNDERSTANDING_STATUS_META) as UnderstandingStatus[]).map(
           (status) => {
@@ -60,7 +61,7 @@ export function ArticleDetailPage() {
                 {meta.label}
               </ToggleGroup.Item>
             );
-          }
+          },
         )}
       </ToggleGroup.Root>
       <div className={style.articleDetail__tags}>
