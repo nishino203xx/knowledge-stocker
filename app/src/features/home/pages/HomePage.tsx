@@ -27,6 +27,10 @@ export function HomePage() {
 
             return "color-empty";
           }}
+          titleForValue={(value) => {
+            if (!value) return "未学習";
+            return `${value.date}\n理解記事数：${value.count}`;
+          }}
         />
       </div>
     </>
