@@ -18,6 +18,20 @@
   fill: #5b21b6;
 }
 
+.react-calendar-heatmap__section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.react-calendar-heatmap__content {
+  width: fit-content;
+  max-width: 100%;
+  padding: 10px 20px;
+  border: solid 1px #b5b5b5;
+  border-radius: 6px;
+}
+
 .react-calendar-heatmap__scroll-container {
   overflow-x: auto;
   overflow-y: hidden;
