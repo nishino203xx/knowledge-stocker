@@ -4,6 +4,12 @@ import "../../../styles/heatmap-lib.scss";
 import styles from "../components/Heatmap.module.scss";
 import { useStudyLog } from "../../studyLog/hooks/useStudyLog";
 import { HeatmapLegend } from "../components/HeatmapLegend";
+import {
+  getStartOfWeek,
+  getEndOfWeek,
+  getEndOfMonth,
+  addYears,
+} from "../../../utils/dateUtils";
 
 export function HomePage() {
   const { dailyCountMap } = useStudyLog();
@@ -12,8 +18,10 @@ export function HomePage() {
     count,
   }));
 
-  const startDate = new Date("2025-12-28");
-  const endDate = new Date("2026-12-31");
+  // ヒートマップ表示期間：直近一年分を週単位(日曜始まり、土曜終わり)で表示
+  const today = new Date();
+  const endDate = getEndOfWeek(getEndOfMonth(today));
+  const startDate = getStartOfWeek(addYears(endDate, -1));
 
   // ヒートマップはデータが存在する日付のみ value が渡されるため、
   // 未学習日(データなし)でも日付を表示できるように、
