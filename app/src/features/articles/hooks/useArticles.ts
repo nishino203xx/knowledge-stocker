@@ -3,13 +3,14 @@ import axios from "axios";
 import type { Article } from "../types/article";
 import { mapQiitaToArticle } from "../../../api/qiita/map";
 import { mapDevToToArticle } from "../../../api/devTo/map";
+import type { SortKey, SortOrder } from "../constants/sort";
 
 export function useArticles() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>();
-  const [sort, setSort] = useState<"createAt">("createAt");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sort, setSort] = useState<SortKey>("createAt");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
@@ -44,14 +45,17 @@ export function useArticles() {
     return sorted;
   }, [articles, sort, sortOrder]);
 
-  const searchArticles = async (keyword: string): Promise<void> => {
+  const searchArticles = async (keywords: Array<string>): Promise<void> => {
     try {
+      /**
+       * TODO: dev.toはタグの複数検索に対応していない。複数回APIを呼び出すなど検討が必要
+       */
       const [qiitaRes, devToRes] = await Promise.all([
         axios.get("https://qiita.com/api/v2/items", {
-          params: { query: `tag:${keyword}` },
+          params: { query: `tag:${keywords.join(",")}` },
         }),
         axios.get("https://dev.to/api/articles", {
-          params: { tag: keyword },
+          params: { tag: keywords.join(",") },
         }),
       ]);
       const qiitaArticles: Article[] = qiitaRes.data.map(mapQiitaToArticle);
@@ -70,6 +74,8 @@ export function useArticles() {
     isLoading,
     error,
     searchArticles,
+    sort,
+    sortOrder,
     setSort,
     setSortOrder,
   };

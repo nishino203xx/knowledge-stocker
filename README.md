@@ -27,6 +27,7 @@ API を利用した記事一覧取得
 - Axios
 - React Router
 - react-markdown / remark-gfm
+- Zod
 
 ## ディレクト構成
 

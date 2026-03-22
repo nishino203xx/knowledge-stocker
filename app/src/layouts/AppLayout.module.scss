@@ -5,15 +5,22 @@
 }
 
 .header {
+  position: sticky;
   display: flex;
   align-items: center;
-  background-color: #4cbefc1d;
+  background-color: #c9e5f5;
+  top: 0;
   padding: 0 16px;
   grid-row: 1;
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   grid-row: 2;
+  min-width: 0;
+  padding: 10px 30px;
 }
 
 .footer {

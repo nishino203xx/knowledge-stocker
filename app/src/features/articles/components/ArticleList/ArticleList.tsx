@@ -10,7 +10,7 @@ export const ArticleList = ({
   isLoading: boolean;
 }) => {
   return (
-    <ul>
+    <ul className={style.articleList}>
       {isLoading ? (
         <li className={style.loadingItem}>
           <div className={style.loading}></div>

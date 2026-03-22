@@ -1,30 +1,15 @@
 import type { Article } from "../../features/articles/types/article";
 import type { ArticleDetail } from "../../features/articles/types/articleDetail";
-
-type DevToUser = {
-  name: string;
-  username: string;
-};
-type DevToItem = {
-  id: number;
-  title: string;
-  body_markdown: string;
-  url: string;
-  positive_reactions_count: number;
-  published_at: string;
-  edited_at: string | null;
-  tag_list: string[];
-  user: DevToUser;
-};
+import type { DevToItem } from "./schema";
 
 export const mapDevToToArticle = (item: DevToItem): Article => {
   return {
     id: `devto-${item.id}`,
     title: item.title,
     url: item.url,
-    tags: item.tag_list,
+    tags: normalizeTags(item),
     likesCount: item.positive_reactions_count,
-    authorName: item.user?.name ?? item.user?.username ?? "",
+    authorName: item.user.name,
     source: "devto",
     remoteId: String(item.id),
     memo: "",
@@ -39,3 +24,22 @@ export const mapDevToToArticleDetail = (item: DevToItem): ArticleDetail => {
     body: item.body_markdown,
   };
 };
+
+/**
+ * タグの正規化
+ *
+ * tag_list / tags がエンドポイントにより
+ * ["a", "b", "c"]
+ * "a, b, c"
+ * のどちらでも来る可能性がある
+ */
+function normalizeTags(item: DevToItem): string[] {
+  const src = item.tag_list ?? item.tags ?? [];
+  if (Array.isArray(src)) {
+    return src;
+  }
+  if (typeof src === "string") {
+    return src.split(",");
+  }
+  return [];
+}
