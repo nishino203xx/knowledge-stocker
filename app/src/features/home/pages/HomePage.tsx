@@ -12,6 +12,25 @@ export function HomePage() {
     count,
   }));
 
+  const startDate = new Date("2025-12-28");
+  const endDate = new Date("2026-12-31");
+
+  // ヒートマップはデータが存在する日付のみ value が渡されるため、
+  // 未学習日(データなし)でも日付を表示できるように、
+  // 表示期間内の全日付を生成する
+  const allDates = [];
+  const current = new Date(startDate);
+  while (current <= endDate) {
+    const dateStr = current.toISOString().slice(0, 10);
+    const heatmapValue = heatmapValues.find((v) => v.date === dateStr);
+
+    allDates.push({
+      date: dateStr,
+      count: heatmapValue ? heatmapValue.count : 0,
+    });
+    current.setDate(current.getDate() + 1);
+  }
+
   return (
     <>
       <div className={`${styles["heatmap__section"]}`}>
@@ -32,10 +51,10 @@ export function HomePage() {
             </div>
             <div className={`${styles["heatmap__scroll-container"]}`}>
               <CalendarHeatmap
-                startDate={new Date("2025-12-28")}
-                endDate={new Date("2026-12-31")}
+                startDate={startDate}
+                endDate={endDate}
                 showOutOfRangeDays
-                values={heatmapValues}
+                values={allDates}
                 classForValue={(value) => {
                   if (!value) return "color-empty";
                   if (value.count >= 10) return "color-scale-4";
@@ -45,7 +64,8 @@ export function HomePage() {
                   return "color-empty";
                 }}
                 titleForValue={(value) => {
-                  if (!value) return "未学習";
+                  if (!value) return "";
+                  if (value.count === 0) return `${value.date}\n未学習`;
                   return `${value.date}\n理解記事数：${value.count}`;
                 }}
               />
