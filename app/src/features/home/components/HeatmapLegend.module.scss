@@ -1,0 +1,42 @@
+.heatmapLegend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.heatmapLegend__label {
+  color: #939393;
+}
+
+.heatmapLegend__scales {
+  display: flex;
+  gap: 3px;
+}
+
+.heatmapLegend__cell {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.heatmapLegend__cell--color-empty {
+  background-color: #f1f1f4;
+}
+
+.heatmapLegend__cell--color-scale-1 {
+  background-color: #ddd6fe;
+}
+
+.heatmapLegend__cell--color-scale-2 {
+  background-color: #b8a8ff;
+}
+
+.heatmapLegend__cell--color-scale-3 {
+  background-color: #8b5cf6;
+}
+
+.heatmapLegend__cell--color-scale-4 {
+  background-color: #5b21b6;
+}

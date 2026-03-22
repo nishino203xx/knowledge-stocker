@@ -1,9 +1,9 @@
-function HomePage() {
+import { Heatmap } from "../components/Heatmap";
+
+export function HomePage() {
   return (
     <>
-      <h1>ホーム</h1>
+      <Heatmap></Heatmap>
     </>
   );
 }
-
-export default HomePage;
