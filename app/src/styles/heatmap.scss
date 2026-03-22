@@ -18,13 +18,13 @@
   fill: #5b21b6;
 }
 
-.react-calendar-heatmap__section {
+.heatmap__section {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.react-calendar-heatmap__content {
+.heatmap__content {
   width: fit-content;
   max-width: 100%;
   padding: 10px 20px;
@@ -32,9 +32,29 @@
   border-radius: 6px;
 }
 
-.react-calendar-heatmap__scroll-container {
+.heatmap__main {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.heatmap__scroll-container {
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+.heatmap__weekday-labels {
+  display: grid;
+  grid-template-rows: repeat(7, 12px);
+  gap: 2px;
+  margin-top: 10px;
+}
+
+.heatmap__weekday-label {
+  display: flex;
+  align-items: center;
+  color: #aaa;
+  font-size: 12px;
 }
 
 .react-calendar-heatmap {
