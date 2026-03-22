@@ -39,7 +39,8 @@ export function Heatmap() {
     current.setDate(current.getDate() + 1);
   }
   return (
-    <div className={`${styles["heatmap__section"]}`}>
+    <div>
+      <h2 className={styles.heatmap__title}>過去1年間の学習記録</h2>
       <div className={`${styles["heatmap__content"]}`}>
         <div className={`${styles["heatmap__main"]}`}>
           {/*
