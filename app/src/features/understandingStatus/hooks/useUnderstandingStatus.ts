@@ -33,13 +33,13 @@ export const useUnderstandingStatus = () => {
   };
 
   const setStatus = (article: Article, status: UnderstandingStatus) => {
-    setMap((pre) => {
-      const prevStatus = pre[article.id] ?? "unread";
-      if (prevStatus === status) return pre;
+    setMap((prev) => {
+      const prevStatus = prev[article.id] ?? UNDERSTANDING_STATUS.UNREAD;
+      if (prevStatus === status) return prev;
 
       // 「理解した」に初めて変更した場合のみ、初回理解日を記録し、日別の学習カウントを増やす
       if (
-        status === "understood" &&
+        status === UNDERSTANDING_STATUS.UNDERSTOOD &&
         !FirstTimeUnderstoodStorage.has(article.id)
       ) {
         const today = getTodayKey();
@@ -66,7 +66,7 @@ export const useUnderstandingStatus = () => {
         StoredArticleSummaryStorage.remove(article.id);
       }
 
-      return { ...pre, [article.id]: status };
+      return { ...prev, [article.id]: status };
     });
   };
 
