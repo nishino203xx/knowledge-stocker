@@ -46,7 +46,7 @@ export function ArticleDetailPage() {
         value={getStatus(articleDetail.id)}
         onValueChange={(value) => {
           if (!value) return;
-          setStatus(articleDetail.id, value as UnderstandingStatus);
+          setStatus(articleDetail, value as UnderstandingStatus);
         }}
       >
         {(Object.keys(UNDERSTANDING_STATUS_META) as UnderstandingStatus[]).map(
