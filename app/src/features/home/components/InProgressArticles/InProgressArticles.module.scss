@@ -7,12 +7,38 @@
 }
 
 .inProgressArticles__item {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding: 12px 0;
   border-bottom: 1px solid #ddd;
   color: #000;
 }
 
-.inProgressArticles__item:hover {
+.inProgressArticles__link:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .inProgressArticles__item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+
+  .inProgressArticles__source {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .inProgressArticles__status {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .inProgressArticles__link {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
 }
