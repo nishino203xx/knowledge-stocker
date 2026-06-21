@@ -27,7 +27,7 @@ export function useArticles() {
         const marged = [...qiitaArticles, ...devToArticles];
 
         setArticles(marged);
-      } catch (error) {
+      } catch {
         setError("記事取得時に問題が発生しました。");
       } finally {
         setIsLoading(false);
@@ -43,7 +43,7 @@ export function useArticles() {
       return sortOrder === "asc" ? aTime - bTime : bTime - aTime;
     });
     return sorted;
-  }, [articles, sort, sortOrder]);
+  }, [articles, sortOrder]);
 
   const searchArticles = async (keywords: Array<string>): Promise<void> => {
     try {
@@ -64,7 +64,7 @@ export function useArticles() {
       const marged = [...qiitaArticles, ...devToArticles];
 
       setArticles(marged);
-    } catch (error) {
+    } catch {
       setError("記事取得時に問題が発生しました。");
     }
   };

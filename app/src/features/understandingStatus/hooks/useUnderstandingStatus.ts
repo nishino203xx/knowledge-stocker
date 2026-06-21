@@ -15,13 +15,10 @@ import type { Article } from "@/features/articles/types/article";
 import type { StoredArticleSummary } from "../types/storedArticleSummary";
 
 export const useUnderstandingStatus = () => {
-  const [map, setMap] = useState<UnderstandingStatusMap>({});
-  const [initialized, setInitialized] = useState(false);
-
-  useEffect(() => {
-    setMap(UnderstandingStatusStorage.load());
-    setInitialized(true);
-  }, []);
+  const [map, setMap] = useState<UnderstandingStatusMap>(() =>
+    UnderstandingStatusStorage.load(),
+  );
+  const [initialized] = useState(true);
 
   useEffect(() => {
     if (!initialized) return;

@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   StoredArticleSummaryStorage,
   type StoredArticleSummaryMap,
 } from "../storage/storedArticleSummaryStorage";
 
 export const useStoredArticleSummaries = () => {
-  const [summaries, setSummaries] = useState<StoredArticleSummaryMap>({});
-
-  useEffect(() => {
-    setSummaries(StoredArticleSummaryStorage.load());
-  }, []);
+  const [summaries] = useState<StoredArticleSummaryMap>(() =>
+    StoredArticleSummaryStorage.load(),
+  );
 
   return { summaries };
 };

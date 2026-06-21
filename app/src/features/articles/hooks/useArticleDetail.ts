@@ -9,7 +9,7 @@ import { QiitaItemShema } from "../../../api/qiita/schema";
 
 export function useArticleDetail(
   source: ArticleSource | undefined,
-  itemId: string | undefined
+  itemId: string | undefined,
 ) {
   const [articleDetail, setArticleDetail] = useState<ArticleDetail>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,25 +22,27 @@ export function useArticleDetail(
       try {
         setIsLoading(true);
         switch (source) {
-          case "qiita":
+          case "qiita": {
             const qiitaRes = await axios.get(
-              `https://qiita.com/api/v2/items/${itemId}`
+              `https://qiita.com/api/v2/items/${itemId}`,
             );
             const qiitaParsed = QiitaItemShema.parse(qiitaRes.data);
             setArticleDetail(mapQiitaToArticleDetail(qiitaParsed));
             break;
-          case "devto":
+          }
+          case "devto": {
             const devToRes = await axios.get(
-              `https://dev.to/api/articles/${itemId}`
+              `https://dev.to/api/articles/${itemId}`,
             );
             const devToParsed = DevToItemShema.parse(devToRes.data);
             setArticleDetail(mapDevToToArticleDetail(devToParsed));
             break;
+          }
           default:
             setError("記事の取得元が不正です。");
             break;
         }
-      } catch (error) {
+      } catch {
         setError("記事が見つかりませんでした。");
       } finally {
         setIsLoading(false);
