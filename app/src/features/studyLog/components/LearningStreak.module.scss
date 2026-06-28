@@ -1,0 +1,20 @@
+.LearningStreak {
+  width: 200px;
+  padding: 0 16px;
+  border: solid 1px #bdbcbc;
+  border-radius: 20px;
+}
+
+.LearningStreak__title {
+  font-size: 20px;
+}
+
+.LearningStreak__value {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.LearningStreak__count {
+  font-size: 30px;
+}
